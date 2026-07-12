@@ -1,18 +1,22 @@
 import os
 import streamlit as st
+from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
+
+load_dotenv()
 
 # ---------------------------------------------------------
 # STEP 1: SETUP THE "BRAIN" (The LLM)
 # ---------------------------------------------------------
 if "GROQ_API_KEY" not in os.environ:
-    os.environ["GROQ_API_KEY"] = "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"
+    st.error("⚠️ Please add GROQ_API_KEY to your .env file")
+    st.stop()
 
 llm = ChatGroq(
     model="openai/gpt-oss-120b",
-    temperature=2
+    temperature=0.7
 )
 
 # ---------------------------------------------------------
